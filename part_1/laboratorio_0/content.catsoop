@@ -1,0 +1,197 @@
+
+Lab0  presentara el proceso de fabricacion de un PCB.
+A diferencia de los laboratorios 1, 2 y 3, este laboratorio no consistira de una construccion.
+Tambien aprenderan a disenar un PCB utilizando el software de diseno asistido por computadora (CAD),
+y en especifico el codigo abierto KiCAD. Finalmente, exportara archivos de fabricacion a una aplicacion
+de fresadora CNC llamada Bantam Tools para tener una idea de como los diferentes parametros de diseno
+pueden tener un impacto en la capacidad de fabricacion de la pieza que diseno.
+
+
+Antes de comenzar a jugar con los diferentes softwares en su computadora, debe realizar una verificacion 
+de laboratorio con el personal donde le haremos 2 o 3 preguntas sobre el contenidoa continuacion.
+Haga una hoja de referencia para prepararse para la revision del laboratorio. Puede utilizar esta hoja de
+trucos para responder 1 de las 3 preguntas de verificacion.
+
+<catsoop-section> Parte 1: Introducción a la fabricacion de PCB <catsoop-section>
+
+La mayoría de las placas de circuito impreso (PCB) constan de varias capas alineadas con precision entre sí y
+conectadas mediante orificios pasantes llamados vías, que puede atravesar completamente el tablero o incrustarse
+dentro de las muchas capas del tablero(ver  1, 2, 3 en la imagen a continuacion).
+
+TODO Insert image
+
+En nuestros laboratorios trabajaremos con placas de $\textbf{una}$ capa. 
+
+
+El materialc onductor utilizado para la mayoría de los PCB es $\textbf{cobre}$ , y es el material naranja en la imagen mostrada.
+Para evitar cortocircuitos (es decir, un flujo de electricidadque no es deseado) entre las capas
+ del tablero, cada capa del tablero esta separada por capas aislantes. Debido a que las características
+de diseno en cada capa, son tanpequenas, es muy importante que el proceso de fabricacion se controle
+ con maquinas de precision. Para garantizar una correcta adhesion entre las capas del tablero,
+  tambien es necesario un riguroso tratamiento químico de cada capa y del conjunto general.
+
+<catsoop-section>Proceso de fabricacion de PCB<catsoop-section>
+
+<castsoop-subsection>Archivos de fabricacion de de diseno y salida<catsoop-subsection>
+
+El archivo de diseno mas comun requerido por los fabricantes se llama archivo GBR(gerber).
+Un archivo GBR es esencialmente una carpeta con varios archivos que contienen informacion sobre 
+las dimensiones de cada característica en una capa individual. Las capas podrían ser capas de cobre
+que tengan las dimensiones delas trazas conductoras entre cada una de las partes del circuito.
+O una capapodría consistir en las dimensiones de la serigrafía (las instrucciones pintadasque van
+encima del tablero). 
+   
+   A continuacion, se adjunta un fragmento de unarchivo GBR de ejemplo
+
+   Ejemplo GBR:
+
+# Todo add gbr file
+
+Ademas del archivo GBR, es importante que los fabricantes dispongan de una lista de materiales.
+Esto se debe a que la mayoría de los fabricantes de PCB soldaran las piezas en la capa superior e inferior de la placa
+(segun las especificaciones de el cliete).
+
+En tercer lugar, tambien es necesario que los fabricantes dispongan de un Archivo de perforación,
+que especifice las instrucciones de corte para los bordes exteriores, así como los agujeros para 
+cada capa. 
+
+Este archivo es separado a el archivo GBR, ya que normalmente las trazas se cortan mediante exposicion
+a luzultravioleta y productos químicos, mientras que los cortes de bordes y los agujeros se cortan
+utilizando una fresadora cnc.
+
+<catsoop-subsection> Aplicacion fotorresistente<catsoop-section>
+
+La fotorresistencia es un material fibrosaque se endurece cuando se expone a la luzultravioleta.
+Se coloca sobre el tablero debajode una capa que lleva partes negras ytransparentes y contiene el
+diseno del tablero. Todo el conjunto esta expuesto a laluz ultravioleta y, debido a que la imagen 
+nopermite que la luz fluya a traves de las piezasimpresas en negro, el fotorresistente en esasareas 
+permanece sin endurecer.
+
+# Todo add picture 
+
+
+<catsoop-subsection>Aguafuerte<catsoop-section>
+
+El fotoprotector no endurecido y el cobre conductor que se encuentra debajo seeliminan mediante
+exposicion a un bano químico. Ahora solo deberían existirlas trazas deseadas en su tablero. La placa
+se coloca en un segundo bano químicopara eliminar el fotoprotector endurecido restante y dejar el
+cobre debajo intacto.
+
+#Todo add picture
+
+<catsoop-subsection>perforación de inspeccion y postgrabo<catsoop-subsection>
+
+Para garantizar una alineacion precisa de las numerosas capas del tablero, se hacen agujeros utilizando
+un punzón central óptico (una maquina que utiliza luz para alinear y fuerza contundente para hacer un
+agujero). Estos agujeros son importantes porque se utilizan en futuros pasos de procesamiento para
+orientar una clavija que se utiliza para alinear con precision cada capa. En la industria,los pasadores
+se utilizan comunmente para la alineacion porque generalmentese fabrican con tornillos mucho mas ajustados.
+(lo que significa que hay menos incertidumbre sobre el tamano real de la pieza porque se mecanizocon mas cuidado).
+
+Despues de inspeccionar la placa utilizando lo que se llama AOI (inspeccionoptica automatizada), el
+tablero se coloca en un tercer bano químico que contiene Recubrimiento de óxido marrón eso evitara
+la corrosion química del tablero y ayudara a que las capas internas se peguen mejor.
+
+<catsoop-subsection> Laminacion <catsoop-subsection>
+
+Una vez que se han hecho todas las capas internas, es hora de laminarlas juntas. El material utilizado
+para unir las capas se llama "preimpregnado”, que es unmaterial delgado típicamente hecho de fibra de
+vidrio para aislamiento y alguntipo de epoxi (gel adhesivo). El preimpregnado se utiliza para adherir
+una capa de cobre superior e inferior al apilamiento, todas las cuales se fusionan mediante una prensa
+calentada.
+
+#Todo insert picture
+
+<catsoop-subsection> Perforacion <catsoop-subsection>
+
+Los orificios para las vías y componentes con terminales axiales (componentes que atraviesen completamente
+la placa en lugar de soldarse a la superficie) se fabrican mediante una fresadora CNC.
+
+# Todo add pictures
+
+Normalmente, cuando se utiliza un taladro, los extremos del metal se elevanformando piezas afiladas llamadas
+rebabas. Por lo general, estos se raspan yahora se desbarba el cobre.
+
+<catsoop-subsection>Deposicion de cobre no electrolitica<catsoop-subsection>
+
+Es importante hacer conductor todo el orificio pasante, lo cual se hacecolocandolo en un bano de cobre diluido.
+Luego el tablero se enjuaga en variosbanos químicos.
+
+<catsoop-subsection> Repita los pasos 2-5 para las capas exteriores <catsoop-subsection>
+
+<catsoop-subsection> Aplicacion de mascara de soldadura y serigrafia <catsoop-subsection>
+
+Máscara de soldadura es una capa (normalmente verde) que se utiliza paraproteger las capas 
+exteriores de la placa y cubrir el cobre expuesto que no seutilizara para soldar componentes. 
+Se cura (endurece) con luz ultravioleta.
+
+La capa Serigrafía (generalmente pintada con colorante blanco) es puramenteestetica e instrucciones 
+sobre como orientar las piezas en el tablero.
+
+# Todo add picture
+
+<catsoop-section> Parte 2: Introduccion a KICAD <catsoop-section>
+
+El componente basico de una PCB multicapa en KiCAD se llama proyecto. Un proyecto esesencialmente 
+una carpeta que contiene muchos archivos, los mas importantes de los cualesson los archivos de 
+esquemas y de PCB. Se le proporcionaran los proyectos KiCAD para loslaboratorios 1-3. Haga doble 
+clic en el .kicad_pro archivo de cualquiera de los laboratorios yjugar con el. Puede cambiar el 
+idioma de la aplicacion a espanol siguiendo la secuencia depulsaciones de botones que se describe 
+en la imagen a continuacion.
+
+# Todo add picture
+
+El esquema (archivo kicad.sch) es el “primer borrador” de como se disenara su tablero.Especifica 
+que conexiones se realizaran entre los componentes sin tener que preocuparse porlas limitaciones 
+geometricas que conlleva tener que encajarlos en el tablero.
+
+#Todo add picture
+
+Si hace doble clic en cualquiera de los componentes del esquema, vera informacion emergentesobre 
+esa parte. Lo mas importante a tener en cuenta es el huella. Contiene las dimensiones deesa pieza, 
+que usara en su archivo .kicad_pcb cuando disene las cosas. No se puede crear unaPCB sin este 
+archivo y, a veces, es necesario descargarlo del sitio web de un proveedor o crearlodesde cero. 
+Haga clic en el boton al que apunta la flecha negra en la imagen a continuacion paraver un registro 
+completo de las huellas predeterminadas que incluye Kicad.
+
+#Todo add picture
+
+El editor de PCB (archivo .kicad_pcb) se utiliza para planificar como encajaran realmente todos 
+los componentes en la capa superior. Aunque en los laboratorios solo trabajamos con tablerosde una 
+sola capa, al realizar las conexiones entre las piezas, es posible utilizar dos o mas capaspara en 
+rutar trazas (las líneas de cobre que conectan las piezas) una debajo de la otra. Vias son agujeros 
+que se utilizan para conectar un determinado punto dentro de la capa superior con lacapa inferior.
+
+#Todo 
+
+Juegue con los archivos .kicad_proj de cada uno de los laboratorios para tener una idea de como 
+funciona el software.
+
+<catsoop-section>PARTE 3: Carga de archivos GBR a la aplicación CNC Mill (Bantam Tools)<catsoop-section>
+
+Una fresadora CNC es una maquina automatizada que le permite cambiar la herramienta decorte que se
+utiliza. En la aplicacion Bantam Tools, ingresaremos un cortador de molino deextremo de tamano 
+1/32”. Como herramienta utilizada, corte las trazas y agujeros del tablero.Recuerde que las 
+instalaciones de produccion de PCB a gran escala no utilizan maquinas comoestas para fabricar la 
+placa completa, sino que utilizan el protocolo descrito al comienzo dellaboratorio. Sin embargo, 
+la maquina CNC de hecho por Bantam Tools es excelente para lacreacion de prototipos y la produccion 
+a pequena escala.
+
+
+Para utilizar esta maquina, debe abrir la aplicacion.
+
+#Todo add picture
+
+Basicamente, existen tres pasos para cortar su tabla en la maquina que se describe acontinuacion. 
+Intente descubrir como transferir archivos GBR de KiCAD a Bantam por su cuentay, si tiene preguntas,
+escriba su nombre en la cola de ayuda y el personal lo guiara a traves del proceso.
+
+# Todo add picture
+
+Juegue con los disenos y configuraciones del tablero tanto en KiCAD como en Bantam Tools Software. 
+Vea si puede descubrir como exportar un archivo GBR para una placa de su propiodiseno al software 
+Bantam Tools.Una vez que presiones "Generar Gcode ahora", deberías ver algo como esto en tu pantalla. 
+Si notiene suficiente espacio entre las características de diseno, vera aparecer líneas rojas en el 
+tablero y una advertencia que indica que necesita una herramienta mas pequena.
+
+#Todo

@@ -1,0 +1,55 @@
+name: Deploy to Linode
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.LINODE_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.LINODE_IP }} >> ~/.ssh/known_hosts
+
+      - name: Set folder ownership
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.LINODE_IP }}
+          username: ${{ secrets.LINODE_SSH_USER }}
+          key: ${{ secrets.LINODE_SSH_KEY }}
+          script: |
+            echo "${{ secrets.LINODE_SUDO_PASSWORD }}" | sudo -S chown -R $USER:$USER ./catsoop_courses/ee
+            echo "${{ secrets.LINODE_SUDO_PASSWORD }}" | sudo -S chmod -R u+rwX ./catsoop_courses/ee
+
+      - name: Clear folder contents on Linode
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.LINODE_IP }}
+          username: ${{ secrets.LINODE_SSH_USER }}
+          key: ${{ secrets.LINODE_SSH_KEY }}
+          script: |
+            rm -rf ./catsoop_courses/ee/*
+            rm -rf ./catsoop_courses/ee/.* 2>/dev/null || true
+
+      - name: Copy entire repo to Linode
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.LINODE_IP }}
+          username: ${{ secrets.LINODE_SSH_USER }}
+          key: ${{ secrets.LINODE_SSH_KEY }}
+          source: "."
+          target: "./catsoop_courses/ee"
+          rm: false
+          strip_components: 0
+          debug: true
+

@@ -1,0 +1,18 @@
+# Exclude Docker-related files
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Exclude documentation
+README.md
+README
+*.md
+
+# Exclude Git files
+.git
+.gitignore
+
+# Exclude other unnecessary files
+*.log
+*.pyc
+__pycache__ 
